@@ -8,6 +8,12 @@ pipeline{
 
     stages{
 
+        stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/monika240986/SELENIUM_DOCKER_RUNNER']])
+            }
+        }
+
         stage('Start Grid'){
             steps{
                 bat "docker-compose -f grid.yaml up --scale ${params.BROWSER}=2 -d"
